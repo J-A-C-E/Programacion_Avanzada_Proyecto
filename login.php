@@ -7,6 +7,7 @@ if(isset($_GET['cerrar_sesion'])){
 
 	// destroy the session 
 	session_destroy(); 
+	header('location: login.php');
 }
 
 if(isset($_SESSION['rol'])){
@@ -15,11 +16,9 @@ if(isset($_SESSION['rol'])){
 			header('location: admin.php');
 		break;
 
-		case 2:
-		header('location: colab.php');
-		break;
-
 		default:
+		header('location: cliente.php');
+		break;
 	}
 }
 
@@ -28,14 +27,13 @@ if(isset($_POST['username']) && isset($_POST['password'])){
 	$password = $_POST['password'];
 
 	$db = new Database();
-	$query = $db->connect()->prepare("CALL SP_agregarDatos (:username,:password)");
-	$query->execute(['username' => $username, 'password' => $password]);
+	$query = $db->connect()->prepare("CALL SP_loginSelect(:username,:password)");
+	$query->execute([':username' => $username, ':password' => $password]);
 
 	$row = $query->fetch(PDO::FETCH_NUM);
 	
 	if($row == true){
-		$rol = $row[4];
-		
+		$rol = $row[3];
 		$_SESSION['rol'] = $rol;
 		
 		switch($rol){
@@ -43,11 +41,9 @@ if(isset($_POST['username']) && isset($_POST['password'])){
 				header('location: admin.php');
 			break;
 
-			case 0:
-			header('location: colab.php');
-			break;
-
 			default:
+			header('location: cliente.php');
+			break;
 		}
 	}else{
 		// no existe el usuario

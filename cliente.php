@@ -5,7 +5,7 @@
     if(!isset($_SESSION['rol'])){
         header('location: login.php');
     }else{
-        if($_SESSION['rol'] != 2){
+        if($_SESSION['rol'] != 0){
             header('location: login.php');
         }
     }

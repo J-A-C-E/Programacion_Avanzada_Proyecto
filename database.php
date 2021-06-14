@@ -11,8 +11,8 @@ class Database{
     public function __construct(){
         $this->host = '192.185.131.135';
         $this->db = 'javierc1_Clinica_Dental';
-        $this->user = 'javierc1_admin';
-        $this->password = 'TECJ@vier';
+        $this->user = 'javierc1_usuario';
+        $this->password = 'dental123';
         $this->charset = 'utf8mb4';
     }
 
