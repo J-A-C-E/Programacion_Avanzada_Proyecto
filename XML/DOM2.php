@@ -1,11 +1,13 @@
 <?php 
-function crear($nombreUsuario)
+function crear()
 {
-    require 'database.php';
+    require 'database2.php';
 
     //$stmt= $conn->prepare('SELECT Usuario FROM Usuario');
     //$sql="CALL SP_obtenerDatosCita('ClienteB')";
-    $sql="CALL SP_obtenerDatosCita('$nombreUsuario')";
+    //$sql="CALL SP_obtenerDatosCita('$nombreUsuario')";
+    $sql="CALL obtenerDatosCita2()";
+
     $stmt= $conn->prepare($sql);
     //$stmt->bindParam(':usuario',Cliente1);
     $stmt->execute();
@@ -68,7 +70,7 @@ function leer(){
     echo $salida;
   }
 
-crear("ClienteB");
+crear();
 leer();
 
 
